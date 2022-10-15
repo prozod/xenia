@@ -4,6 +4,7 @@ import Head from "next/head";
 import Button from "../src/components/button/button.component";
 import Gradients from "../src/components/gradients/gradients.component";
 //test
+//testing remote branch upstream
 const Hero = () => {
   const container = {
     initial: { y: "-25%", opacity: 0 },
