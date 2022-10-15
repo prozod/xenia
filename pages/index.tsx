@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Button from "../src/components/button/button.component";
 import Gradients from "../src/components/gradients/gradients.component";
-
+//test
 const Hero = () => {
   const container = {
     initial: { y: "-25%", opacity: 0 },
