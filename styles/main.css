@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-primary-900 w-full text-white font-manrope overflow-x-hidden;
+  }
+
+  #__next {
+    @apply flex flex-col h-screen overflow-x-hidden;
+  }
+
+  .bg {
+    background-image: url("../public/bg.png");
+    background-size: 125rem;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .purple-gradient {
+    background-image: url("../public/poorpl.png");
+    background-size: 125rem;
+    background-position: center;
+    background-repeat: no-repeat;
+      
+  }
+  .pink-gradient {
+    background-image: url("../public/penk.png");
+    background-size: 125rem;
+    background-position: center;
+    background-repeat: no-repeat;
+      
+  }
+  .lines {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  }
+}
+
+@property --a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 10deg;
+}
+
+@layer components {
+  .box {
+    @apply w-10/12 md:w-9/12 mx-auto;
+  }
+  
+.btn-gradient-full { 
+    @apply font-medium bg-gradient-to-r from-indigo-500/50 to-fuchsia-600/50 hover:from-indigo-500/80 hover:to-fuchsia-600/80;
+}
+
+  .btn-gradient-outline {
+    --a: 0turn;
+    background: conic-gradient(from var(--a) at 50% 50%, rgba(129, 140, 248, 0.5), 180deg, rgba(232, 121, 249, 1), 300deg, rgba(129, 140, 248,0.5));
+    transition: --a 0.5s;
+    animation: gradientoutline 3s infinite;
+  }
+
+  @keyframes gradientoutline {
+    0% {
+      --a: 0turn;
+    }
+
+    /* 50% { */
+    /*   --a: 359deg; */
+    /* } */
+    100% {
+      --a: 1turn;
+    }
+  }
+}
+/* @apply bg-gradient-to-r from-fuchsia-400 to-indigo-500 shadow-[0px_-3px_25px_1px_bg-rose-500] hover:shadow-purple-400/40; */
