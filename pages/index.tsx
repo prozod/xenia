@@ -3,8 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Button from "../src/components/button/button.component";
 import Gradients from "../src/components/gradients/gradients.component";
-//test
-//testing remote branch upstream
+
 const Hero = () => {
   const container = {
     initial: { y: "-25%", opacity: 0 },
@@ -57,8 +56,8 @@ const Hero = () => {
           listening to these days
         </motion.p>
         <motion.div variants={item} className="relative flex gap-2 my-4">
-          <Button.FullGradient text="Browse our albums" />
-          <Button.GradientOutline text="Create free account" />
+          <Button.FullGradient text="Explore collections" href="/collections" />
+          <Button.GradientOutline text="Create free account" href="/account" />
         </motion.div>
       </motion.div>
     </div>

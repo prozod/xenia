@@ -18,6 +18,7 @@ Button.GradientOutline = function ButtonGradientOutline({
   iconLeft,
   iconRight,
   expand,
+  ...props
 }: IButton) {
   return (
     <span
@@ -26,9 +27,10 @@ Button.GradientOutline = function ButtonGradientOutline({
       } justify-center items-center rounded-full btn-gradient-outline py-[1px] px-[1px] text-sm font-medium`}
     >
       <button
-        className={`w-full shadow-md shadow-indigo-400/30 hover:shadow-lg hover:shadow-indigo-500/50 bg-primary-900 hover:bg-primary-900/70 hover:backdrop-blur-sm block py-1 px-3 rounded-full transition-all cursor-pointer  ${
+        className={`w-full shadow-md shadow-indigo-400/30 hover:shadow-lg hover:shadow-indigo-500/50 bg-primary-900 hover:bg-primary-900/70 hover:backdrop-blur-sm block py-1 px-3 rounded-full transition-all cursor-pointer disabled:cursor-not-allowed  ${
           (iconLeft || iconRight) && "flex gap-2 items-center justify-center"
         } items-center transition-all`}
+        {...props}
       >
         {iconLeft}
         {href ? (
@@ -50,6 +52,7 @@ Button.Outline = function ButtonOutline({
   expand,
   iconLeft,
   iconRight,
+  ...props
 }: IButton) {
   return (
     <span
@@ -58,11 +61,12 @@ Button.Outline = function ButtonOutline({
       }  rounded-full py-[1px] px-[1px] text-sm font-medium`}
     >
       <button
-        className={`border-[0.25px] ${
+        className={`border-[0.25px] disabled:cursor-not-allowed ${
           expand ? "w-full" : "w-max"
         } border-white/10 hover:border-indigo-400/50 py-1 px-3 rounded-full cursor-pointer  ${
           (iconLeft || iconRight) && "flex gap-2 items-center justify-center"
         } transition-all`}
+        {...props}
       >
         {href ? (
           <Link href={href} className="leading-2 m-0 p-0">

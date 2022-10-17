@@ -13,6 +13,15 @@ module.exports = {
           800: "#1A1A1A",
         },
       },
+      keyframes: {
+        scalein: {
+          "0%": { transform: "scale(0.9)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
+      },
+      animation: {
+        scalein: "scalein 100ms ease-in 1",
+      },
     },
     fontFamily: {
       manrope: ["Manrope", "sans-serif"],
