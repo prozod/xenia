@@ -2,7 +2,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-function Dropdown({ children }) {
+function Dropdown({ children }: { children: React.ReactNode }) {
   return <DropdownMenu.Root>{children}</DropdownMenu.Root>;
 }
 
