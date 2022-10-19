@@ -5,20 +5,25 @@ import { useRouter } from "next/router";
 import Navigation from "../src/components/navigation/navigation.component";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
   const router = useRouter();
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <>
-      <SessionProvider session={session}>
-        <Navigation />
-        <AnimatePresence mode="wait">
-          <Component {...pageProps} key={router.route} />
-        </AnimatePresence>
-      </SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider session={session}>
+          <Navigation />
+          <AnimatePresence mode="wait">
+            <Component {...pageProps} key={router.route} />
+          </AnimatePresence>
+        </SessionProvider>
+      </QueryClientProvider>
     </>
   );
 }

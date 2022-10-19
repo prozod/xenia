@@ -149,7 +149,7 @@ function Navigation() {
                       <Dropdown.Item
                         icon={<Component2Icon width={14} height={14} />}
                         text="Profile"
-                        href="/u/id"
+                        href={`/user/${session?.user.id}`}
                       />
                       <Dropdown.Item
                         icon={<GearIcon width={14} height={14} />}
