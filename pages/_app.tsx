@@ -8,6 +8,8 @@ import { Session } from "next-auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
@@ -17,6 +19,7 @@ function MyApp({
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={true} />
         <SessionProvider session={session}>
           <Navigation />
           <AnimatePresence mode="wait">

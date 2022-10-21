@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cypress": "cypress open"
+    "lint": "next lint"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
@@ -15,6 +14,7 @@
     "@radix-ui/react-dropdown-menu": "^1.0.0",
     "@radix-ui/react-icons": "^1.1.1",
     "@tanstack/react-query": "^4.12.0",
+    "@tanstack/react-query-devtools": "^4.12.0",
     "framer-motion": "^7.5.3",
     "next": "12.3.1",
     "next-auth": "^4.14.0",
@@ -27,7 +27,6 @@
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.12",
-    "cypress": "^10.10.0",
     "eslint": "8.25.0",
     "eslint-config-next": "12.3.1",
     "postcss": "^8.4.17",
