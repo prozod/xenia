@@ -18,7 +18,10 @@ Dropdown.Trigger = function DropdownTrigger({
       {unstyled ? (
         <DropdownMenu.Trigger>{children}</DropdownMenu.Trigger>
       ) : (
-        <DropdownMenu.Trigger className="text-sm border-[0.25px] flex items-center gap-2 w-max border-white/10 hover:border-indigo-400/50 py-1 px-3 rounded-full cursor-pointer transition-all">
+        <DropdownMenu.Trigger
+          id="account-dropdown-trigger"
+          className="text-sm border-[0.25px] flex items-center gap-2 w-max border-white/10 hover:border-indigo-400/50 py-1 px-3 rounded-full cursor-pointer transition-all"
+        >
           {children}
         </DropdownMenu.Trigger>
       )}
