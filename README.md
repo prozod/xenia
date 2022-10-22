@@ -1,4 +1,4 @@
-![alt text]('./public/githubprofilehome.pngi')
+![alt text]('./public/githubprofilehome.png')
 
 ## Xenia
 
