@@ -14,42 +14,29 @@ enum Role {
     USER
 }
 
-enum Contributor {
-    MIXING
-    MASTERING
-    PRODUCTION
-    RECORDING
-}
-
 model Artist {
-    id          String             @id @default(uuid())
-    name        String             @unique @db.VarChar(255)
-    createdAt   DateTime           @default(now())
-    updatedAt   DateTime           @updatedAt
+    id          String   @id @default(uuid())
+    name        String   @unique @db.VarChar(255)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
     dob         DateTime
     description Json?
-    albums      ArtistsAndAlbums[]
+    albums      Album[]
 }
 
 model Album {
-    id           String             @id @default(uuid())
-    createdAt    DateTime           @default(now())
-    updatedAt    DateTime           @updatedAt
-    title        String             @unique @db.VarChar(255)
-    releaseDate  DateTime
-    recordLabel  String             @db.VarChar(255)
-    contributors Json?
-    artists      ArtistsAndAlbums[]
-    albumCover   String
-}
-
-model ArtistsAndAlbums {
-    album    Album  @relation(fields: [albumId], references: [id])
-    albumId  String
-    Artist   Artist @relation(fields: [artistId], references: [id])
-    artistId String
-
-    @@id([albumId, artistId])
+    id          String    @id @default(uuid())
+    title       String    @unique @db.VarChar(255)
+    artists     Artist[]
+    releaseDate DateTime
+    cover       String?
+    genre       Json?
+    tracks      Track[]
+    points      Int?
+    comments    Comment[]
+    label       String?   @db.VarChar(255)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
 }
 
 // Next Auth Prisma Adapter Model
@@ -88,6 +75,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    comments      Comment[]
 }
 
 model VerificationToken {
@@ -96,4 +84,26 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Comment {
+    id        String    @id @default(uuid())
+    album     Album     @relation(fields: [albumId], references: [id])
+    albumId   String
+    author    User      @relation(fields: [authorId], references: [id])
+    authorId  String
+    body      Json
+    createdAt DateTime
+    updatedAt DateTime
+    Children  Comment[] @relation("comment_children")
+    parent    Comment?  @relation("comment_children", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    parentId  String?
+}
+
+model Track {
+    album   Album  @relation(fields: [albumId], references: [id])
+    albumId String
+    title   String
+
+    @@id([albumId])
 }
