@@ -56,7 +56,7 @@ const Hero = () => {
           listening to these days
         </motion.p>
         <motion.div variants={item} className="relative flex gap-2 my-4">
-          <Button.FullGradient text="Explore collections" href="/collections" />
+          <Button.FullGradient text="Explore albums" href="/albums" />
           <Button.GradientOutline text="Create free account" href="/account" />
         </motion.div>
       </motion.div>
