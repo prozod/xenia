@@ -10,12 +10,12 @@ import {
 } from "@radix-ui/react-icons";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import useOutside from "../../utils/useOutside";
 import React from "react";
 import Button from "../button/button.component";
 import { useRouter } from "next/router";
 import Dropdown from "../dropdown/dropdown.component";
 import { signOut, useSession } from "next-auth/react";
+import useOutside from "../../hooks/useOutside";
 
 function Navigation() {
   const [isMobile, setIsMobile] = useState(false);
@@ -50,18 +50,13 @@ function Navigation() {
             onClick={() => setIsComponentVisible(false)}
           />
           <Navigation.ListItem
-            href="/collections"
-            text="Collections"
+            href="/albums"
+            text="Albums"
             onClick={() => setIsComponentVisible(false)}
           />
           <Navigation.ListItem
             href="/about"
             text="About"
-            onClick={() => setIsComponentVisible(false)}
-          />
-          <Navigation.ListItem
-            href="/albums"
-            text="Albums"
             onClick={() => setIsComponentVisible(false)}
           />
           <Navigation.ListItem
@@ -149,7 +144,7 @@ function Navigation() {
                       <Dropdown.Item
                         icon={<Component2Icon width={14} height={14} />}
                         text="Profile"
-                        href="/u/id"
+                        href={`/user/${session?.user.id}`}
                       />
                       <Dropdown.Item
                         icon={<GearIcon width={14} height={14} />}

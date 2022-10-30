@@ -109,18 +109,20 @@ const AccountPage = ({ providers }: { providers: SessionProviderProps }) => {
             <small className="border-b-[0.5px] border-t-[0.5px] border-white/20 py-1 my-2 opacity-30 text-center text-xs uppercase font-bold">
               alternatively, sign in with...
             </small>
-            {Object.values(providers).map((provider) => (
-              <div key={provider.name}>
-                <Button.GradientOutline
-                  key={provider.name}
-                  expand
-                  type="button"
-                  text={`Sign in with ${provider.name}`}
-                  onClick={() => signIn(provider.id, { callbackUrl: "/" })}
-                  iconRight={<ChevronRightIcon width={18} height={18} />}
-                />
-              </div>
-            ))}
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <div key={provider.name}>
+                  <Button.GradientOutline
+                    key={provider.name}
+                    expand
+                    type="button"
+                    text={`Sign in with ${provider.name}`}
+                    onClick={() => signIn(provider.id, { callbackUrl: "/" })}
+                    iconRight={<ChevronRightIcon width={18} height={18} />}
+                    data-provider={provider.name}
+                  />
+                </div>
+              ))}
           </Form>
         </motion.div>
       </section>

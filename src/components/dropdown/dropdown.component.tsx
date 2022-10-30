@@ -2,7 +2,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-function Dropdown({ children }) {
+function Dropdown({ children }: { children: React.ReactNode }) {
   return <DropdownMenu.Root>{children}</DropdownMenu.Root>;
 }
 
@@ -18,7 +18,10 @@ Dropdown.Trigger = function DropdownTrigger({
       {unstyled ? (
         <DropdownMenu.Trigger>{children}</DropdownMenu.Trigger>
       ) : (
-        <DropdownMenu.Trigger className="text-sm border-[0.25px] flex items-center gap-2 w-max border-white/10 hover:border-indigo-400/50 py-1 px-3 rounded-full cursor-pointer transition-all">
+        <DropdownMenu.Trigger
+          id="account-dropdown-trigger"
+          className="text-sm border-[0.25px] flex items-center gap-2 w-max border-white/10 hover:border-indigo-400/50 py-1 px-3 rounded-full cursor-pointer transition-all"
+        >
           {children}
         </DropdownMenu.Trigger>
       )}
