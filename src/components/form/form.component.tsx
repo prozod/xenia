@@ -34,15 +34,20 @@ Form.Label = function FormLabel({ text, ...props }: IFormLabel) {
   );
 };
 
-Form.Input = function FormInput({
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement>) {
+Form.Input = React.forwardRef(function FormInput(
+  props: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   return (
     <input
       {...props}
+      ref={ref}
       className="rounded-md px-2 py-1 text-white bg-primary-900/20 border-[0.25px] border-white/20 focus:border-b-1 focus:border-b-indigo-400/70 outline-none peer placeholder-transparent transition-all w-full"
     />
   );
-};
+});
 
 export default Form;
