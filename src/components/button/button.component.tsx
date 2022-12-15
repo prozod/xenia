@@ -22,14 +22,14 @@ Button.GradientOutline = function ButtonGradientOutline({
 }: IButton) {
   return (
     <span
-      className={`flex ${
-        expand ? "grow w-full" : "w-max"
+      className={`flex  ${
+        expand ? "flex-1 w-full" : "w-max" // had grow here
       } justify-center items-center rounded-full btn-gradient-outline py-[1px] px-[1px] text-sm font-medium`}
     >
       <button
-        className={`w-full shadow-md shadow-indigo-400/30 hover:shadow-lg hover:shadow-indigo-500/50 bg-primary-900 hover:bg-primary-900/70 hover:backdrop-blur-sm block py-1 px-3 rounded-full transition-all cursor-pointer disabled:cursor-not-allowed  ${
+        className={`w-full shadow-md shadow-indigo-400/30 hover:shadow-lg hover:shadow-indigo-500/50 bg-primary-900 hover:bg-primary-900/80  block py-1 px-3 rounded-full transition-all cursor-pointer disabled:cursor-not-allowed ${
           (iconLeft || iconRight) && "flex gap-2 items-center justify-center"
-        } items-center transition-all`}
+        }  transition-all`}
         {...props}
       >
         {iconLeft}
