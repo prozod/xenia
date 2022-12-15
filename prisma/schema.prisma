@@ -101,9 +101,8 @@ model Comment {
 }
 
 model Track {
+    id      String @id @default(uuid())
+    title   String
     album   Album  @relation(fields: [albumId], references: [id])
     albumId String
-    title   String
-
-    @@id([albumId])
 }

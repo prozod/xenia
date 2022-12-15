@@ -1,34 +1,50 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import React, { useRef } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { useQuery } from "@tanstack/react-query";
+import React, { useRef, useState } from "react";
 import Album, { IAlbum } from "../src/components/album/album.component";
-import Button from "../src/components/button/button.component";
-import Form from "../src/components/form/form.component";
-import {
-  getAllAlbums,
-  postNewAlbum,
-} from "../src/services/album/album.service";
+import NewAlbumForm from "../src/components/album/albumSubmission.component";
+import useOutside from "../src/hooks/useOutside";
+import { getAllAlbums } from "../src/services/album/album.service";
+
+export interface ISong {
+  trackNum: number;
+  trackName: string;
+}
 
 const Albums = () => {
+  const [open, setOpen] = useState(false);
   const { data, isLoading } = useQuery(["all-albums"], () => getAllAlbums(), {
     staleTime: 30 * 1000,
   });
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const mutation = useMutation<any, any, any>({
-    mutationFn: (data) => postNewAlbum(data),
-  });
-
-  const onFileSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    const fd = new FormData();
-    // const imgName = fileInputRef.current?.files?.item(0)?.name;
-    fd.append("album-image", fileInputRef.current?.files?.item(0)!);
-    mutation.mutate(fd);
-  };
+  console.log(data);
 
   return (
     <section className="box">
-      <h1 className="text-2xl font-bold pb-8">Albums</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-bold">Albums</h1>
+        <Dialog.Root open={open} onOpenChange={setOpen}>
+          <Dialog.Trigger className="flex gap-2 text-sm items-center" asChild>
+            <button
+              className={`border-[0.25px] disabled:cursor-not-allowed  border-white/10 hover:border-indigo-400/50 py-1 px-3 rounded-full cursor-pointer  
+           transition-all`}
+            >
+              <PlusIcon /> Add album
+            </button>
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Dialog.Overlay className="bg-primary-800/30 backdrop-blur-sm absolute top-0 left-0 w-screen h-screen flex items-center justify-center z-30">
+              <Dialog.Content
+                className="flex justify-center items-center "
+                onPointerDownOutside={(e) => e.preventDefault()}
+              >
+                <NewAlbumForm />
+              </Dialog.Content>
+            </Dialog.Overlay>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </div>
+
       {isLoading && (
         <div role="status">
           <svg
@@ -56,16 +72,8 @@ const Albums = () => {
             <Album.Tile key={album.id} album={album} />
           ))}
       </Album>
-      <Form onSubmit={onFileSubmit}>
-        <Form.Input
-          type="file"
-          name="filename"
-          accept="image/*"
-          ref={fileInputRef}
-        />
-        <Button.GradientOutline type="submit" text="Add cover image" />
-      </Form>
     </section>
   );
 };
+
 export default Albums;

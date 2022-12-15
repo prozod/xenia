@@ -7,17 +7,17 @@ export const getAllAlbums = async () => {
   return data;
 };
 
-export const postNewAlbum = async (formdata: any) => {
-  console.log("postNewAlbum Fn:", "/api/albums", formdata);
+export const postNewAlbum = async (data: any) => {
+  console.log("postNewAlbum Fn:", "/api/albums", data);
   const res = await fetch("api/albums", {
     headers: {
       // "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
     },
-    method: "PUT",
+    method: "POST", // was put
     credentials: "include",
     mode: "cors",
-    body: formdata,
+    body: data,
   });
   return res;
 };
