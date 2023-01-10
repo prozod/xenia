@@ -7,7 +7,7 @@ import sharp from "sharp";
 import multer from "multer";
 import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { AlbumInfoType } from "../../src/components/album/albumSubmission.component";
+import { AlbumInfoType } from "../../src/components/album/albumSubmission.utils";
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage, limits: { fieldSize: 2_621_440 } });
@@ -36,28 +36,46 @@ albumApi.use(
   ])
 );
 
-albumApi.get(async (_req, res) => {
+albumApi.get(async (req, res) => {
+  console.log("backend QUERY", req.query.id);
   // get all albums
   try {
-    const albums = await prisma.album.findMany({
-      include: {
-        artists: true,
-      },
-    });
+    if (req.query.id === undefined) {
+      const albums = await prisma.album.findMany({
+        include: {
+          artists: true,
+        },
+      });
 
-    // generate presigned urls for AWS S3 images, available 30minutes
-    for (let album of albums) {
+      // generate presigned urls for AWS S3 images, available 30minutes
+      for (let album of albums) {
+        const getObjectParams = {
+          Bucket: process.env.S3_BUCKET,
+          Key: `${albums[0].cover!}`,
+        };
+        const command = new GetObjectCommand(getObjectParams);
+        const url = await getSignedUrl(S3, command, { expiresIn: 1800 });
+        !album.cover?.startsWith("h") && (album.cover = url);
+      }
+
+      res.status(200).json(albums);
+    } else {
+      const album = await prisma.album.findFirst({
+        where: { id: req.query.id as string },
+        include: {
+          artists: true,
+        },
+      });
       const getObjectParams = {
         Bucket: process.env.S3_BUCKET,
-        Key: `${albums[0].cover!}`,
+        Key: `${album?.cover!}`,
       };
       const command = new GetObjectCommand(getObjectParams);
       const url = await getSignedUrl(S3, command, { expiresIn: 1800 });
-      console.log("Signed URL:", url);
-      !album.cover?.startsWith("h") && (album.cover = url);
-    }
+      !album?.cover?.startsWith("h") && (album!.cover = url);
 
-    res.status(200).json(albums);
+      res.status(200).json(album);
+    }
   } catch (e) {
     console.log("Error occured in album call [GET REQ ERROR]: ", e);
     res.status(500).json({ error: "Error fetching albums" });

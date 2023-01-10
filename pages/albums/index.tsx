@@ -1,11 +1,10 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
-import React, { useRef, useState } from "react";
-import Album, { IAlbum } from "../src/components/album/album.component";
-import NewAlbumForm from "../src/components/album/albumSubmission.component";
-import useOutside from "../src/hooks/useOutside";
-import { getAllAlbums } from "../src/services/album/album.service";
+import React, { useState } from "react";
+import Album, { IAlbum } from "../../src/components/album/album.component";
+import NewAlbumForm from "../../src/components/album/albumSubmission.component";
+import { getAllAlbums } from "../../src/services/album/album.service";
 
 export interface ISong {
   trackNum: number;
@@ -17,7 +16,6 @@ const Albums = () => {
   const { data, isLoading } = useQuery(["all-albums"], () => getAllAlbums(), {
     staleTime: 30 * 1000,
   });
-  console.log(data);
 
   return (
     <section className="box">
