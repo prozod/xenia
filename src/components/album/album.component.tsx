@@ -1,8 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { IArtist } from "../artist/artist.component";
 
+export function dashedQueryParams(text: string) {
+  if (text) return text.toLowerCase().split(" ").join("-").trim();
+}
 export interface IAlbum {
   artists: IArtist[];
   cover: string;
@@ -28,15 +30,30 @@ Album.Tile = function AlbumTile({ album }: { album: IAlbum }) {
   return (
     <Link
       href={{
-        pathname: `/albums/[name]`,
-        query: { name: album.title.toLowerCase().trim(), id: album.id },
+        pathname: `/artist/[name]`,
+        query: {
+          name: album?.artists[0]?.name,
+          album: dashedQueryParams(album?.title),
+        },
       }}
+      as={`/artist/${dashedQueryParams(
+        album.artists[0]?.name
+      )}?album=${dashedQueryParams(album.title)}`}
     >
       <div className="z-30 w-full h-full bg-gradient-to-r from-primary-800 to-primary-900 border-[0.5px] border-white/10 hover:border-indigo-400/40 aspect-square rounded-md relative flex items-end cursor-pointer group">
         <div className="w-full p-4 group-hover:-translate-y-2 transition-all">
           <h1 className="text-xl font-bold">{album.title}</h1>
           <p className="text-white/70 group-hover:text-indigo-400">
-            by {album.artists.map((artist) => artist.name)}
+            by{" "}
+            {album.artists.map((artist) => (
+              <Link
+                key={artist.name}
+                href={`/artist/${dashedQueryParams(artist.name)}`}
+                passHref
+              >
+                <span className="hover:text-white">{artist.name}</span>
+              </Link>
+            ))}
           </p>
         </div>
         <span className="z-[-10] bg-gradient-to-t from-zinc-900 to-transparent w-full h-full absolute inset-0 rounded-md"></span>

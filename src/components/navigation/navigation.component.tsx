@@ -1,21 +1,20 @@
-import Image from "next/image";
-import Link from "next/link";
 import {
-  PersonIcon,
+  Component2Icon,
+  GearIcon,
   HamburgerMenuIcon,
   LockClosedIcon,
-  GearIcon,
-  Component2Icon,
   LockOpen2Icon,
+  PersonIcon,
 } from "@radix-ui/react-icons";
-import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import Button from "../button/button.component";
-import { useRouter } from "next/router";
-import Dropdown from "../dropdown/dropdown.component";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import useOutside from "../../hooks/useOutside";
+import Button from "../button/button.component";
+import Dropdown from "../dropdown/dropdown.component";
 
 function Navigation() {
   const [isMobile, setIsMobile] = useState(false);

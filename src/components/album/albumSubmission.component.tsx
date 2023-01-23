@@ -1,14 +1,14 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import React, { useRef, useState } from "react";
-import Form from "../form/form.component";
+import { Cross1Icon, PlusIcon } from "@radix-ui/react-icons";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import Image from "next/image";
+import React, { useRef, useState } from "react";
 import { postNewAlbum } from "../../services/album/album.service";
-import Button from "../button/button.component";
 import { getArtists } from "../../services/artist/artist.service";
 import { IArtistResponse } from "../artist/artist.types";
-import Image from "next/image";
-import { Cross1Icon, PlusIcon } from "@radix-ui/react-icons";
-import CustomSelect from "../select/select.component";
+import Button from "../button/button.component";
+import Form from "../form/form.component";
+import { CreateSelect, CustomSelect } from "../select/select.component";
 import { selectMenuStyles } from "../select/select.styles";
 import {
   AlbumInfoType,

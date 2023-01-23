@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function useOutside(ref: React.RefObject<HTMLElement>) {
   const [isComponentVisible, setIsComponentVisible] = useState<boolean>(false);

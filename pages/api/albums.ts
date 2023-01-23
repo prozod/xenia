@@ -1,12 +1,12 @@
+import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import multer from "multer";
 import { NextApiRequest, NextApiResponse } from "next";
+import nc from "next-connect";
+import sharp from "sharp";
 import { v4 } from "uuid";
 import prisma from "../../lib/prisma";
 import S3 from "../../lib/s3client";
-import nc from "next-connect";
-import sharp from "sharp";
-import multer from "multer";
-import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { AlbumInfoType } from "../../src/components/album/albumSubmission.utils";
 
 const storage = multer.memoryStorage();
@@ -37,10 +37,9 @@ albumApi.use(
 );
 
 albumApi.get(async (req, res) => {
-  console.log("backend QUERY", req.query.id);
   // get all albums
   try {
-    if (req.query.id === undefined) {
+    if (req.query.title === undefined) {
       const albums = await prisma.album.findMany({
         include: {
           artists: true,
@@ -61,9 +60,10 @@ albumApi.get(async (req, res) => {
       res.status(200).json(albums);
     } else {
       const album = await prisma.album.findFirst({
-        where: { id: req.query.id as string },
+        where: { title: req.query.title as string },
         include: {
           artists: true,
+          tracks: true,
         },
       });
       const getObjectParams = {
@@ -146,6 +146,25 @@ albumApi.post<ExtendRequestType>(async (req, res) => {
   } catch (e) {
     console.log("Error occured in album call [PUT REQ ERROR]: ", e);
     res.status(500).json({ error: "Error posting album" });
+  }
+});
+
+albumApi.delete(async (req, res) => {
+  console.log("DELETE REQ", req.query);
+  try {
+    const resp = await prisma.album.delete({
+      where: {
+        id: req.query.id as string,
+      },
+    });
+    res
+      .status(200)
+      .json({ message: "The album was deleted successfully.", data: resp });
+  } catch (e) {
+    console.log("Error occured while deleting the album", e);
+    res.status(500).json({
+      error: "An error occured while deleting the album from the database.",
+    });
   }
 });
 

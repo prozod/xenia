@@ -8,10 +8,29 @@ export const getAllAlbums = async () => {
 };
 
 export const getAlbum = async (query: string) => {
-  console.log("getAlbum Q", query);
-  const res = await fetch(`/api/albums?id=${query}`);
+  const res = await fetch(
+    `/api/albums?title=${query.split("-").join(" ").toString()}`
+  );
+
   if (!res.ok) {
     throw new Error(`An error occured in getAlbum fn`);
+  }
+  const data = await res.json();
+  return data;
+};
+
+export const deleteAlbum = async (query: string) => {
+  const res = await fetch(`/api/albums?id=${query}`, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+  });
+
+  if (!res.ok) {
+    throw new Error(`An error occured in deleteAlbum fn`);
   }
   const data = await res.json();
   return data;
