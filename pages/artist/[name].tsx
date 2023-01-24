@@ -3,29 +3,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  dashedQueryParams,
-  IAlbum,
+    dashedQueryParams,
+    IAlbum
 } from "../../src/components/album/album.component";
 import { IArtist } from "../../src/components/artist/artist.component";
 import Button from "../../src/components/button/button.component";
-import { deleteAlbum, getAlbum } from "../../src/services/album/album.service";
-import { getArtist } from "../../src/services/artist/artist.service";
+import {
+    ALBUM_QUERY_FN,
+    ALBUM_QUERY_KEY
+} from "../../src/services/album/album.service";
+
+import {
+    ARTIST_QUERY_FN,
+    ARTIST_QUERY_KEY
+} from "../../src/services/artist/artist.service";
 
 const ArtistPage = () => {
   const router = useRouter();
-  const mutation = useMutation<any, any, any>({
-    mutationFn: (id) => deleteAlbum(id),
-  });
+  const mutation = useMutation<any, any, any>(ALBUM_QUERY_FN.DELETE);
   const artistQuery = useQuery(
-    ["artist"],
-    () => getArtist(router.query.name as string),
+    ARTIST_QUERY_KEY.SINGLE,
+    () => ARTIST_QUERY_FN.SINGLE(router.query.name as string),
     {
       enabled: Boolean(router.query.name),
     }
   );
   const albumQuery = useQuery<string[], IAlbum, IAlbum>(
-    ["album"],
-    () => getAlbum(router.query.album as string),
+    ALBUM_QUERY_KEY.SINGLE,
+    () => ALBUM_QUERY_FN.SINGLE(router.query.album as string),
     {
       enabled: Boolean(router.query.album),
     }
@@ -138,7 +143,7 @@ const ArtistPage = () => {
                   </tr>
                 </thead>
                 <tbody className="table-row-group">
-                  {albumQuery?.data.tracks.map((track, idx) => {
+                  {albumQuery?.data.tracks.map((track, idx: number) => {
                     return (
                       <tr key={track.id} className="table-row">
                         <td className="table-cell p-2  bg-neutral-900 border border-neutral-800">

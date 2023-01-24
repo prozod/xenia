@@ -4,7 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Album, { IAlbum } from "../../src/components/album/album.component";
 import NewAlbumForm from "../../src/components/album/albumSubmission.component";
-import { getAllAlbums } from "../../src/services/album/album.service";
+import {
+  ALBUM_QUERY_FN,
+  ALBUM_QUERY_KEY,
+} from "../../src/services/album/album.service";
 
 export interface ISong {
   trackNum: number;
@@ -13,9 +16,13 @@ export interface ISong {
 
 const Albums = () => {
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useQuery(["all-albums"], () => getAllAlbums(), {
-    staleTime: 30 * 1000,
-  });
+  const { data, isLoading } = useQuery(
+    ALBUM_QUERY_KEY.ALL,
+    ALBUM_QUERY_FN.ALL,
+    {
+      staleTime: 30 * 1000,
+    }
+  );
 
   return (
     <section className="box">
