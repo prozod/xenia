@@ -7,6 +7,11 @@ interface IFormLabel extends React.LabelHTMLAttributes<HTMLLabelElement> {
   text: string;
 }
 
+interface IFormTextarea
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  text: string;
+}
+
 interface IFormInput extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 function Form(props: IForm) {
@@ -39,6 +44,17 @@ Form.Label = function FormLabel({ text, ...props }: IFormLabel) {
     >
       {text}
     </label>
+  );
+};
+
+Form.Textarea = function FormTextarea({ text, ...props }: IFormTextarea) {
+  return (
+    <textarea
+      {...props}
+      className="absolute -top-5 left-0 text-white/60 font-bold text-xs peer-focus:text-indigo-400 peer-focus:-top-5 peer-focus:left-0 peer-placeholder-shown:top-[0.6rem] peer-placeholder-shown:left-3 transition-all"
+    >
+      {text}
+    </textarea>
   );
 };
 

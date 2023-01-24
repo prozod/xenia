@@ -24,3 +24,18 @@ export const getAllArtists = async () => {
   const data = await res.json();
   return data;
 };
+
+export const postNewArtist = async (data: any) => {
+  console.log("postNewArtist Fn:", "/api/artist", data);
+  const res = await fetch("/api/artist", {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    body: JSON.stringify(data),
+  });
+  return res;
+};

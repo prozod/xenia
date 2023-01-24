@@ -29,20 +29,24 @@ export default async function artistRequests(
       }
       break;
     case "POST":
-      console.log("CREATE ARTIST REQ BODY", req.body);
+      console.log(
+        "CREATE ARTIST REQ BODY",
+        req?.body?.name,
+        req?.body?.description
+      );
       try {
-        // const artist = await prisma.artist.create({
-        //   data: {},
-        //   // `name` varchar(255) NOT NULL,
-        //   // `dob` datetime(3) NOT NULL,
-        //   // `description` json,
-        // });
-        // res.status(200).json(artist);
+        const artist = await prisma.artist.create({
+          data: {
+            name: req.body.name,
+            description: req.body.description,
+            dob: new Date(),
+          },
+        });
+        res.status(200).json(artist);
       } catch (e) {
         console.log("Error occured in artist call [POST REQ ERROR]: ", e);
         res.status(500).json({ error: "Error creating artist" });
       }
-
       break;
     default:
       res.setHeader("Allow", ["GET"]);
@@ -50,3 +54,9 @@ export default async function artistRequests(
       break;
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: true, // Disallow body parsing, consume as stream
+  },
+};
