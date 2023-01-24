@@ -9,7 +9,6 @@ import Form from "../../src/components/form/form.component"
 import { ARTIST_QUERY_FN, ARTIST_QUERY_KEY } from "../../src/services/artist/artist.service"
 
 var a
-const b
 function test() {
 	return "a"
 }
