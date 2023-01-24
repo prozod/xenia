@@ -8,43 +8,43 @@ import { getArtists } from "../../services/artist/artist.service";
 import { IArtistResponse } from "../artist/artist.types";
 import Button from "../button/button.component";
 import Form from "../form/form.component";
-import { CreateSelect, CustomSelect } from "../select/select.component";
+import { CustomSelect } from "../select/select.component";
 import { selectMenuStyles } from "../select/select.styles";
 import {
   AlbumInfoType,
-  albumSchema,
-  ArtistSelectOpts,
-  genreSelectOptions,
-} from "./albumSubmission.utils";
+      albumSchema,
+      ArtistSelectOpts,
+      genreSelectOptions,
+    } from "./albumSubmission.utils";
 
-function NewAlbumForm() {
-  const [song, setSong] = useState<string>("");
-  const [showError, setShowError] = useState<string>("");
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [imgPreviewUrl, setImgPreviewUrl] = useState<string>();
-  const [albumInfo, setAlbumInfo] = useState<AlbumInfoType>({
-    title: "",
-    label: "",
-    artists: [""],
-    genres: [""],
-    cover: undefined,
-    songs: [
-      { trackNum: 1, trackName: "Woes and foes" },
-      { trackNum: 2, trackName: "Come and go" },
-      { trackNum: 3, trackName: "Chronos" },
-    ],
-  });
-
-  function addSong() {
-    if (song !== undefined && song !== "" && song.trim().length >= 1) {
-      setAlbumInfo({
-        ...albumInfo,
+    function NewAlbumForm() {
+      const [song, setSong] = useState<string>("");
+      const [showError, setShowError] = useState<string>("");
+      const fileInputRef = useRef<HTMLInputElement | null>(null);
+      const [imgPreviewUrl, setImgPreviewUrl] = useState<string>();
+      const [albumInfo, setAlbumInfo] = useState<AlbumInfoType>({
+        title: "",
+        label: "",
+        artists: [""],
+        genres: [""],
+        cover: undefined,
         songs: [
-          ...albumInfo.songs,
-          {
-            trackNum: albumInfo.songs.length + 1,
-            trackName: song,
-          },
+          { trackNum: 1, trackName: "Woes and foes" },
+          { trackNum: 2, trackName: "Come and go" },
+          { trackNum: 3, trackName: "Chronos" },
+        ],
+      });
+
+      function addSong() {
+        if (song !== undefined && song !== "" && song.trim().length >= 1) {
+          setAlbumInfo({
+            ...albumInfo,
+            songs: [
+              ...albumInfo.songs,
+              {
+                trackNum: albumInfo.songs.length + 1,
+                trackName: song,
+              },
         ],
       });
       setSong(() => "");
