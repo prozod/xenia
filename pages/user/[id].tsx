@@ -1,5 +1,5 @@
-import Image from "next/image"
 import { useQuery } from "@tanstack/react-query"
+import Image from "next/image"
 import { useRouter } from "next/router"
 import { USER_QUERY_FN, USER_QUERY_KEY } from "../../src/services/user/user.service"
 

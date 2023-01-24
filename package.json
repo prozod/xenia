@@ -63,6 +63,10 @@
 			"prettier --write",
 			"eslint"
 		],
+		"./pages/**/*.{tsx, ts}": [
+			"prettier --write",
+			"eslint"
+		],
 		"./src/services/**/*.{service.ts, service.tsx}": [
 			"prettier --write",
 			"eslint"
