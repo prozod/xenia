@@ -9,9 +9,6 @@ import Form from "../../src/components/form/form.component"
 import { ARTIST_QUERY_FN, ARTIST_QUERY_KEY } from "../../src/services/artist/artist.service"
 
 var a
-function test() {
-	return "a"
-}
 
 export const artistSchema = z.object({
 	name: z.string().refine((str) => str.length > 1, "Name field is empty."),
