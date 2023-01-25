@@ -59,9 +59,9 @@ const ArtistPage = () => {
 												album: dashedQueryParams(album?.title),
 											},
 										}}
-										as={`/artist/${dashedQueryParams(
-											artistQuery?.data?.name
-										)}?album=${dashedQueryParams(album?.title)}`}
+										as={`/artist/${dashedQueryParams(artistQuery?.data?.name)}?album=${dashedQueryParams(
+											album?.title
+										)}`}
 									>
 										<p>{album.title}</p>
 									</Link>
@@ -120,9 +120,7 @@ const ArtistPage = () => {
 								<thead className="table-header-group">
 									<tr className="table-row">
 										<th className="table-cell p-2 bg-neutral-900 border border-neutral-800">No.</th>
-										<th className="table-cell p-2 bg-neutral-900 border border-neutral-800">
-											Title
-										</th>
+										<th className="table-cell p-2 bg-neutral-900 border border-neutral-800">Title</th>
 									</tr>
 								</thead>
 								<tbody className="table-row-group">
@@ -132,12 +130,8 @@ const ArtistPage = () => {
 												key={track.id}
 												className="table-row"
 											>
-												<td className="table-cell p-2  bg-neutral-900 border border-neutral-800">
-													{idx + 1}
-												</td>
-												<td className="table-cell p-2 bg-neutral-900 border border-neutral-800">
-													{track.title}
-												</td>
+												<td className="table-cell p-2  bg-neutral-900 border border-neutral-800">{idx + 1}</td>
+												<td className="table-cell p-2 bg-neutral-900 border border-neutral-800">{track.title}</td>
 											</tr>
 										)
 									})}

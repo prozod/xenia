@@ -13,7 +13,7 @@
 	"semi": false,
 	"singleAttributePerLine": true,
 	"singleQuote": false,
-	"tabWidth": 4,
+	"tabWidth": 2,
 	"trailingComma": "es5",
 	"useTabs": true
 }

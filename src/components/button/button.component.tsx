@@ -52,9 +52,7 @@ Button.GradientOutline = function ButtonGradientOutline({
 
 Button.Outline = function ButtonOutline({ text, href, expand, iconLeft, iconRight, ...props }: IButton) {
 	return (
-		<span
-			className={`flex ${expand ? "grow w-full" : "w-max"}  rounded-full py-[1px] px-[1px] text-sm font-medium`}
-		>
+		<span className={`flex ${expand ? "grow w-full" : "w-max"}  rounded-full py-[1px] px-[1px] text-sm font-medium`}>
 			<button
 				className={`border-[0.25px] disabled:cursor-not-allowed ${
 					expand ? "w-full" : "w-max"

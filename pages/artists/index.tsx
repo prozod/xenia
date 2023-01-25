@@ -8,8 +8,6 @@ import Button from "../../src/components/button/button.component"
 import Form from "../../src/components/form/form.component"
 import { ARTIST_QUERY_FN, ARTIST_QUERY_KEY } from "../../src/services/artist/artist.service"
 
-var a
-
 export const artistSchema = z.object({
 	name: z.string().refine((str) => str.length > 1, "Name field is empty."),
 	description: z
@@ -89,9 +87,7 @@ function ArtistPage() {
 											htmlFor="artistname"
 										/>
 										{showError.message.length > 1 && showError.path[0] === "name" && (
-											<span className="text-xs font-bold text-red-400 mb-4">
-												{showError.message}
-											</span>
+											<span className="text-xs font-bold text-red-400 mb-4">{showError.message}</span>
 										)}
 									</Form.Group>
 									<Form.Group>
@@ -117,9 +113,7 @@ function ArtistPage() {
 											htmlFor="description"
 										/>
 										{showError.message.length > 1 && showError.path[0] === "description" && (
-											<span className="text-xs font-bold text-red-400 mb-4">
-												{showError.message}
-											</span>
+											<span className="text-xs font-bold text-red-400 mb-4">{showError.message}</span>
 										)}
 									</Form.Group>
 									<div className="flex justify-between gap-4">
@@ -158,9 +152,7 @@ function ArtistPage() {
 								<td className="table-cell p-2  bg-neutral-900 border border-neutral-800">{idx + 1}</td>
 								<td className="table-cell p-2 bg-neutral-900 border border-neutral-800">
 									<Link href={`/artist/${dashedQueryParams(artist.name)}`}>
-										<span className="hover:text-indigo-400 cursor-pointer transition-all">
-											{artist.name}
-										</span>
+										<span className="hover:text-indigo-400 cursor-pointer transition-all">{artist.name}</span>
 									</Link>
 								</td>
 							</tr>
