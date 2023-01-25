@@ -1,21 +1,9 @@
 import Link from "next/link"
 import React from "react"
-import { IArtist } from "../artist/artist.component"
+import { IAlbum } from "../../../pages/api/albums"
 
 export function dashedQueryParams(text: string) {
 	if (text) return text.toLowerCase().split(" ").join("-").trim()
-}
-export interface IAlbum {
-	artists: IArtist[]
-	cover: string
-	createdAt?: Date
-	genre: string
-	id: string
-	label: string
-	points: number
-	releaseDate: Date
-	title: string
-	updatedAt?: Date
 }
 
 const Album = ({ children }: { children: React.ReactNode }) => {

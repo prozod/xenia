@@ -3,14 +3,14 @@ import { Cross1Icon, PlusIcon } from "@radix-ui/react-icons"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import React, { useRef, useState } from "react"
+import { IArtistResponse } from "../../../pages/api/artist"
 import { ALBUM_QUERY_FN } from "../../services/album/album.service"
 import { ARTIST_QUERY_FN, ARTIST_QUERY_KEY } from "../../services/artist/artist.service"
-import { IArtistResponse } from "../artist/artist.types"
 import Button from "../button/button.component"
 import Form from "../form/form.component"
 import { CustomSelect } from "../select/select.component"
 import { selectMenuStyles } from "../select/select.styles"
-import { AlbumInfoType, albumSchema, ArtistSelectOpts, genreSelectOptions } from "./albumSubmission.utils"
+import { AlbumInfoType, albumSchema, ArtistSelectOpts, genreSelectOptions } from "./albumSubmissionForm.utils"
 
 function NewAlbumForm() {
 	const [song, setSong] = useState<string>("")
@@ -83,7 +83,7 @@ function NewAlbumForm() {
 		formData.append("album-image", fileInputRef.current?.files?.item(0)!)
 		formData.append("album-data", albumData)
 
-		// mutation.mutate(formData); // post request
+		mutation.mutate(formData) // post request
 	}
 
 	// create image thumbnail preview of uploaded cover
