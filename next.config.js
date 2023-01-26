@@ -3,7 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["lh3.googleusercontent.com", "upload.wikimedia.org"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "upload.wikimedia.org",
+      "cdn.albumoftheyear.org",
+      "xeniawebapp.s3.eu-central-1.amazonaws.com",
+    ],
   },
   async headers() {
     return [
