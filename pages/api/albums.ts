@@ -7,7 +7,7 @@ import sharp from "sharp"
 import { v4 } from "uuid"
 import prisma from "../../lib/prisma"
 import S3 from "../../lib/s3client"
-import { AlbumInfoType } from "../../src/components/album/albumSubmission.utils"
+import { AlbumInfoType } from "../../src/components/album/albumSubmissionForm.utils"
 import { IArtist } from "./artist"
 
 const storage = multer.memoryStorage()
@@ -84,7 +84,6 @@ albumApi.get(async (req, res) => {
 })
 
 albumApi.post<ExtendRequestType>(async (req, res) => {
-	console.log(req.files)
 	const albumImage = req.files["album-image"][0]
 	const albumData: AlbumInfoType = JSON.parse(await new Response(req.files["album-data"][0].buffer).text()).data
 
@@ -144,7 +143,6 @@ albumApi.post<ExtendRequestType>(async (req, res) => {
 })
 
 albumApi.delete(async (req, res) => {
-	console.log("DELETE REQ", req.query)
 	try {
 		const resp = await prisma.album.delete({
 			where: {
@@ -172,6 +170,7 @@ export interface IAlbumTrack {
 	id: string
 	title: string
 }
+
 export interface IAlbum {
 	artists: IArtist[]
 	cover: string
@@ -184,4 +183,13 @@ export interface IAlbum {
 	title: string
 	updatedAt?: Date
 	tracks?: IAlbumTrack[]
+}
+
+export interface IAlbumPostData {
+	title: string
+	label: string
+	artists: string[]
+	genres: string[]
+	cover: unknown
+	songs: [{ trackNum: number; trackName: string }]
 }

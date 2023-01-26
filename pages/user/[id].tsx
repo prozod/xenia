@@ -13,7 +13,6 @@ const UserProfile = () => {
 		staleTime: 10 * 1000,
 	})
 
-	console.log("getUserProfile Data: ", data)
 	return (
 		<main className="box">
 			<div className=" flex gap-4 items-center bg-primary-800/60 backdrop-blur-md border-[0.5px] border-indigo-400/40 p-4 rounded-md">

@@ -7,6 +7,7 @@ import { dashedQueryParams } from "../../src/components/album/album.component"
 import Button from "../../src/components/button/button.component"
 import Form from "../../src/components/form/form.component"
 import { ARTIST_QUERY_FN, ARTIST_QUERY_KEY } from "../../src/services/artist/artist.service"
+import { IArtistResponse } from "../api/artist"
 
 export const artistSchema = z.object({
 	name: z.string().refine((str) => str.length > 1, "Name field is empty."),
@@ -17,7 +18,7 @@ export const artistSchema = z.object({
 })
 
 function ArtistPage() {
-	const { data, isLoading } = useQuery(ARTIST_QUERY_KEY.ALL, ARTIST_QUERY_FN.ALL)
+	const { data, isLoading } = useQuery<string, unknown, IArtistResponse[]>(ARTIST_QUERY_KEY.ALL, ARTIST_QUERY_FN.ALL)
 	const [open, setOpen] = useState(false)
 	const [showError, setShowError] = useState({ message: "", path: "" })
 	const [artistInfo, setArtistInfo] = useState({ name: "", description: "" })

@@ -72,7 +72,6 @@ function NewAlbumForm() {
 		if (!parsedAlbumInfo.success) {
 			let error = JSON.parse(parsedAlbumInfo.error.message)[0]
 			setShowError(() => error.message)
-			console.log(showError)
 		}
 
 		const formData = new FormData()

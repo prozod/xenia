@@ -1,3 +1,5 @@
+import { IArtistResponse } from "../../../pages/api/artist"
+
 export const getArtists = async () => {
 	const res = await fetch(`/api/artist?all`)
 	if (!res.ok) {
@@ -26,7 +28,6 @@ export const getAllArtists = async () => {
 }
 
 export const postNewArtist = async (data: any) => {
-	console.log("postNewArtist Fn:", "/api/artist", data)
 	const res = await fetch("/api/artist", {
 		headers: {
 			"Content-Type": "application/json",
@@ -47,5 +48,5 @@ export const ARTIST_QUERY_KEY = {
 export const ARTIST_QUERY_FN = {
 	ALL: () => getAllArtists(),
 	SINGLE: (params: string) => getArtist(params),
-	ADD: (data) => postNewArtist(data),
+	ADD: (data: IArtistResponse) => postNewArtist(data),
 }

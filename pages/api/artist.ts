@@ -17,7 +17,6 @@ export default async function artistRequests(req: NextApiRequest, res: NextApiRe
 						},
 						include: { albums: true },
 					})
-					console.log(`queried for ${req.query.name}`)
 					res.status(200).json(artist)
 				}
 			} catch (e) {
@@ -26,7 +25,6 @@ export default async function artistRequests(req: NextApiRequest, res: NextApiRe
 			}
 			break
 		case "POST":
-			console.log("CREATE ARTIST REQ BODY", req?.body?.name, req?.body?.description)
 			try {
 				const artist = await prisma.artist.create({
 					data: {

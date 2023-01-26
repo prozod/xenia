@@ -1,11 +1,11 @@
 import { ChevronRightIcon } from "@radix-ui/react-icons"
 import { motion } from "framer-motion"
+import { getProviders, SessionProviderProps, signIn } from "next-auth/react"
+import Head from "next/head"
 import React, { useState } from "react"
 import Button from "../../src/components/button/button.component"
 import Form from "../../src/components/form/form.component"
 import Gradients from "../../src/components/gradients/gradients.component"
-import { getProviders, signIn, SessionProviderProps } from "next-auth/react"
-import Head from "next/head"
 
 const formAnimation = {
 	initial: {

@@ -1,3 +1,5 @@
+import { IAlbumPostData } from "../../../pages/api/albums"
+
 export const getAllAlbums = async () => {
 	const res = await fetch(`/api/albums`)
 	if (!res.ok) {
@@ -58,5 +60,5 @@ export const ALBUM_QUERY_FN = {
 	DELETE: {
 		mutationFn: (id: string) => deleteAlbum(id),
 	},
-	ADD: (data) => postNewAlbum(data),
+	ADD: (data: IAlbumPostData) => postNewAlbum(data),
 }
